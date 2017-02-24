@@ -30,7 +30,7 @@ To create infrastructure and a Ansible Tower instance via Terraform
 brew install terraform
 ```
 
-Then edit `roles/aws.terraform/vars/main.yml` and fill in the vars with your AWS api info. This role can also provide easy domain name mapping to all the instances if you have a domain registered in AWS Route 53. 
+Then edit `group_vars/all` and fill in the vars with your AWS api info. This role can also provide easy domain name mapping to all the instances if you have a domain registered in AWS Route 53. 
 
 
 ```
@@ -48,7 +48,7 @@ aws_secret_key: ""
 ```
 
 ```
-ansible-playbook -i inventory aws_infra_terraform.yml --tags "tf_create" 
+ansible-playbook -i inventory 1_aws_infra.yml --tags "tf_create" 
 ```
 
 To destroy

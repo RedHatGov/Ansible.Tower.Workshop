@@ -2,32 +2,32 @@
 #---------------------------------------------------
 #  SSH Key
 #---------------------------------------------------
-# - name: Check for existing key and remove
-#   ec2_key: name="{{ workshop_prefix }}-tower" region="{{ region }}" state=absent
-#   tags:
-#     - tf_create
+- name: Check for existing key and remove
+  ec2_key: name="{{ workshop_prefix }}-tower" region="{{ region }}" state=absent
+  tags:
+    - tf_create
 
-# - name: Create EC2 keypair
-#   ec2_key: name="{{ workshop_prefix }}-tower" region="{{ region }}" state=present
-#   register: ec2_key
-#   tags:
-#     - tf_create
+- name: Create EC2 keypair
+  ec2_key: name="{{ workshop_prefix }}-tower" region="{{ region }}" state=present
+  register: ec2_key
+  tags:
+    - tf_create
 
-# - debug: var=ec2_key
-#   tags:
-#     - tf_create
+- debug: var=ec2_key
+  tags:
+    - tf_create
 
-# - name: Make temporary location to run Terraform
-#   file: path="{{ terraform_working_dir }}"  state=directory
-#   tags:
-#     - tf_create
+- name: Make temporary location to run Terraform
+  file: path="{{ terraform_working_dir }}"  state=directory
+  tags:
+    - tf_create
 
-# - name: Create ssh keypair
-#   copy: content="{{ ec2_key.key.private_key }}"
-#         dest="{{ terraform_working_dir }}/{{ workshop_prefix }}-tower"
-#         mode=0400
-#   tags:
-#     - tf_create
+- name: Create ssh keypair
+  copy: content="{{ ec2_key.key.private_key }}"
+        dest="{{ terraform_working_dir }}/{{ workshop_prefix }}-tower"
+        mode=0400
+  tags:
+    - tf_create
 
 #---------------------------------------------------
 #  Terraform.io
