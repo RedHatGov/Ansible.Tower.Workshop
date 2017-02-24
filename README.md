@@ -17,6 +17,9 @@ This repo also requires that you have Ansible installed on your local machine. F
 
 This repo also requires that Terraform be installed if you are using the aws.infra.terraform role. For the most upto data methods of installing Terraform for your operating system [check here](https://www.terraform.io/downloads.html).
 
+If you are only doing an Ansible workshop, subscribing the nodes is not necessary, so you may edit the following file:
+	roles/ansible.tower/tasks/main.yml
+Comment out the line that includes the RH subscriptions.
 
 
 ## AWS Infrastructure Roles
