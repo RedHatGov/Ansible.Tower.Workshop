@@ -1,0 +1,29 @@
+#--------------------------------------------------
+# Install Ansible
+#--------------------------------------------------
+- name: Install EPEL
+  become: yes
+  yum:
+    name: "https://dl.fedoraproject.org/pub/epel/epel-release-latest-{{ ansible_distribution_major_version }}.noarch.rpm"
+    state: present
+
+- name: Install base packages
+  become: yes
+  yum: name={{ item }} state=latest enablerepo=epel-testing
+  with_items: 
+      - vim
+      - git
+      - ansible
+
+
+- name: Install ansible.cfg and vimrc in home directory
+  copy: src="{{ item }}" dest=/home/ec2-user/
+  with_items:
+    - vimrc
+    - license
+
+- name: Copy over SSH Key to ec2-user home
+  copy: src="{{ terraform_working_dir }}/{{ workshop_prefix }}-tower" dest=/home/ec2-user/.ssh/{{ workshop_prefix }}-tower mode=0400
+
+- name: Template over ansible.cfg
+  template: dest=/home/ec2-user/ansible.cfg  src=ansible.cfg.j2  

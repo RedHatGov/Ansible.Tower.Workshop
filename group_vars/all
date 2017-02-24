@@ -1,0 +1,49 @@
+# file: group_vars
+#####################################################
+#
+#               ////IMPORTANT////
+#
+# aws.infra.terraform |  Prefix all resources to 
+#                        ensure easy cleanup and 
+#                        identifcation.
+#####################################################
+workshop_prefix: ""
+
+
+#####################################################
+# aws.infra.terraform |  Domain Name you own
+#####################################################
+domain_name: ""
+zone_id: ""
+
+#####################################################
+# aws.infra.terraform |  AWS API Keys terraform.tfvars
+#####################################################
+aws_access_key: ""
+aws_secret_key: ""
+region: "us-east-1"
+
+#####################################################
+# aws.infra.terraform |  .terraform working dir 
+#####################################################
+terraform_working_dir: "{{ lookup('env','PWD') }}/.terraform"
+
+#####################################################
+# aws.infra.terraform |  SSH Key Vars
+#####################################################
+ssh_key_path: "{{ terraform_working_dir }}/{{ workshop_prefix }}-tower"
+ansible_ssh_private_key_file: "{{ terraform_working_dir }}/{{ workshop_prefix }}-tower"
+# ansible_ssh_user: ec2-user
+
+#####################################################
+# aws.infra.terraform |  Number of Students
+#####################################################
+num_nodes: 0
+
+#####################################################
+# ansible.tower       |  Subscribe RHEL Nodes
+#####################################################
+username: ""
+password: ""
+pool_id: ""
+

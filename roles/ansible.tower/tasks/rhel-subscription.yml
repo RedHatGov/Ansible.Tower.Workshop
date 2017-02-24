@@ -1,0 +1,17 @@
+---
+
+- name: subscribe RHN
+  redhat_subscription: state=present username='{{ username }}' password='{{ password }}' autosubscribe=true pool='{{ pool_id }}'
+  # retries: 10
+  tags:
+    - rhel
+
+- name: Enable the requisite rhel7 repos
+  shell: subscription-manager repos --enable="rhel-7-server-rpms" --enable="rhel-7-server-extras-rpms" --enable="rhel-7-server-optional-rpms" 
+  tags:
+    - rhel
+
+- name: Import keys
+  rpm_key: state=present key=/etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-beta
+  tags:
+    - rhel

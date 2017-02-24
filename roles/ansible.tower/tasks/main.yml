@@ -1,0 +1,17 @@
+---
+###################################
+# Common Packages
+###################################
+- include: rhel-subscription.yml
+- include: nodes_setup.yml
+
+###################################
+# Base setup of Tower
+###################################
+# - include: tower_setup.yml
+
+###################################
+# tower-cli users setup
+###################################
+# - include: user_setup.yml
+

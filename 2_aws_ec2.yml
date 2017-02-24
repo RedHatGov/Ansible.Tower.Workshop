@@ -1,0 +1,20 @@
+# file: 2_aws_ec2.yml
+---
+
+- name: Configure Nodes 
+  become: yes
+  hosts: tag_Role_node
+  remote_user: ec2-user
+  roles:
+    - { role: ansible.tower }
+
+
+
+#############################################################
+#  USAGE
+#############################################################
+
+# Using ec2.py to query AWS for your instance by AWS Tags
+#
+# ansible-playbook -i inventory 2_aws_ec2.yml
+
