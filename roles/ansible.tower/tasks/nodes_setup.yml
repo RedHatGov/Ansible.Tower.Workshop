@@ -12,18 +12,32 @@
   yum: name={{ item }} state=latest enablerepo=epel-testing
   with_items: 
       - vim
+      - nano
       - git
       - ansible
 
 
-- name: Install ansible.cfg and vimrc in home directory
-  copy: src="{{ item }}" dest=/home/ec2-user/
+- name: Install Ansible license in home directory
+  copy: src="{{ item }}" dest=/home/ec2-user/ owner=ec2-user group=ec2-user
   with_items:
-    - vimrc
     - license
 
+
+- name: Create vim plugin storage directory
+  file: path=/home/ec2-user/.vim/autoload state=directory owner=ec2-user group=ec2-user
+
+
+- name: Install vim plugin manager
+  get_url: url=https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim dest=/home/ec2-user/.vim/autoload/plug.vim owner=ec2-user group=ec2-user
+
+
+- name: Install vimrc in home directory
+  copy: src=vimrc dest=/home/ec2-user/.vimrc owner=ec2-user group=ec2-user
+
+
 - name: Copy over SSH Key to ec2-user home
-  copy: src="{{ terraform_working_dir }}/{{ workshop_prefix }}-tower" dest=/home/ec2-user/.ssh/{{ workshop_prefix }}-tower mode=0400
+  copy: src="{{ terraform_working_dir }}/{{ workshop_prefix }}-tower" dest=/home/ec2-user/.ssh/{{ workshop_prefix }}-tower mode=0400 owner=ec2-user group=ec2-user
+
 
 - name: Template over ansible.cfg
-  template: dest=/home/ec2-user/ansible.cfg  src=ansible.cfg.j2  
+  template: dest=/home/ec2-user/ansible.cfg  src=ansible.cfg.j2  owner=ec2-user group=ec2-user
