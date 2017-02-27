@@ -51,7 +51,7 @@ aws_secret_key: ""
 ```
 
 ```
-ansible-playbook -i inventory 1_aws_infra.yml --tags "tf_create" 
+ansible-playbook -i inventory 1_aws_infra.yml
 ```
 
 To destroy
